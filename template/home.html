@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="start_container" id="start_container">
+
+    <div class="start_upper">
+        <div>Welcome To <span style="color: rgb(55, 190, 200); font-size: 7vw;">Blog Here </span></div>
+        <div style="font-size: 3vw; color: rgb(47, 95, 13);">Your Blogs Are Getting Ready</div>
+    </div>
+    
+
+    <div class="start_animation_video">
+        <img src="{% static 'videos/chat.gif' %}" alt="Fast Forward GIF">
+    </div>
+
+
+</div>
+<div class="all_post_container">
+    
+    {% for post in all_post %}
+    <div class="single_post_container">
+    <div class="post_upper">
+        <a href="/other_profile/{{post.profile.id}} " style="text-decoration: none;">
+            <div class="post_profile_image">
+                <img src="media/{{post.profile.profile_picture}}" width="50px" height="50px" alt="">
+            </div>
+            <div class="post_username">
+                {{post.profile.user.username}}
+            </div>
+        </a>
+    </div>
+    <div class="post_title">
+        {{post.post_title}}
+    </div>
+    <div class="post_image">
+        <img src="media/{{post.post_file}}" width="200px" height="200px" alt="">
+        
+    </div>
+    <div class="post_description">
+        <h1>{{post.post_description | truncatewords:12 }} <a style="color: blue; display: inline;" href="/post_detail/{{post.id}}">Read More</a></h1>
+    </div>
+ 
+    <div class="post_timing">
+        {{post.post_created_at}}
+    </div>
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

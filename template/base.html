@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"> 
+</head>
+
+<body>
+
+    
+    
+    <div class="sidebar" id="sidebar">
+        <div class="menuname">
+            <div class="name">Menu</div> 
+            <img class="closebtn" src="{% static 'images/close.png' %}" alt="" onclick="sideclose()">
+        </div>
+        <div class="sidebar_btn">
+            <a href="/"><img src="{% static 'images/home-button.png' %}" width="25px" height="25px" alt="">Home</a>
+            {% if request.user.is_authenticated %}
+            <a href="/show_profile"><img src="{% static 'images/user.png' %}" width="25px" height="25px" alt="">Profile</a>
+            <a href="/add_post"><img src="{% static 'images/plus.png' %}" width="25px" height="25px" alt="">Add Post</a>
+            {% endif %}
+        </div>
+        <div class="logout_btn">
+            {% if request.user.is_authenticated %}
+            <a href="/logout">Logout</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="navbar">
+        <div class="menuicon">
+            <img src="{% static 'images/menu-bar.png' %}" onclick="sideopen()" alt="">
+        </div>
+        <div class="companyname">
+            Blog Here
+        </div>
+        <div class="anchorbtn">
+            {% if not request.user.is_authenticated %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            {% else %}
+            <a href="/add_post">Add Post</a>
+            <a href="/logout">Logout</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% block content %}
+
+
+
+{% endblock %}
+
+
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

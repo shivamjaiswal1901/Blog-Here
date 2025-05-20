@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="profile_upperportion">
+    <div class="insideupper1">
+        <div class="profile_picture">
+            <img src="/media/{{profile_data.profile_picture}}" width="200" height="200" alt="">
+        </div>
+        <div class="profile_pff">
+            <div class="postcount">
+             Posts
+            
+                <p style="text-align: center; margin-top: 20px; padding: 0;">{{count_posts}}</p>
+            </div>
+        </div>
+        {% if profile_data.user.is_authenticated %}
+        <div class="btn_icon" id="btn_icon" onclick="profile_menu()">
+            <div class="dots">...</div>
+            <div class="dots_btn" id="dots_btn">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="insideupper2">
+        <div class="profile_name">
+            {{profile_data.name}}
+        </div>
+        <div class="profile_bio">
+            {{profile_data.bio}}
+        </div>
+       
+    </div>
+    
+</div>
+<div style="height: 2px; background-color: black; width: 100%; margin-top: 50px;"></div>
+    <div class="all_post_container">
+    
+        {% for post in profile_posts %}
+        <div class="single_post_container">
+
+        <div class="post_title">
+            {{post.post_title}}
+        </div>
+        <div class="post_image">
+            <img src="/media/{{post.post_file}}" width="200px" height="200px" alt="">
+            
+        </div>
+        <div class="post_description">
+            <h1>{{post.post_description | truncatewords:12 }} <a style="color: blue; display: inline;" href="/post_detail/{{post.id}}">Read More</a></h1> 
+        </div>
+        <div class="lcss">
+            <img id="like{{post.id}}" src="{% static 'images/love.png' %}" alt="" onclick="like('like{{post.id}}')">
+            
+        </div>
+        <div class="post_timing">
+            {{post.post_created_at}}
+        </div>
+    </div>
+    {% endfor %}
+    
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="single_post_container" style="margin-top: 10vh;">
+    <div class="post_upper">
+        <a href="/other_profile/{{post.profile.id}} " style="text-decoration: none;">
+            <div class="post_profile_image">
+                <img src="/media/{{post.profile.profile_picture}}" width="50px" height="50px" alt="">
+            </div>
+            <div class="post_username">
+                {{post.profile.user.username}}
+            </div>
+        </a>
+    </div>
+    <div class="post_title">
+        {{post.post_title}}
+    </div>
+    <div class="post_image">
+        <img src="/media/{{post.post_file}}" width="200px" height="200px" alt="">
+        
+    </div>
+    <div class="post_description">
+        <h1>{{post.post_description}}</h1>
+    </div>
+ 
+    <div class="post_timing">
+        {{post.post_created_at}}
+    </div>
+</div>
+
+
+{% endblock %}
